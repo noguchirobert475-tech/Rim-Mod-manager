@@ -9,16 +9,15 @@
 **Branch principal:** `main`  
 **Estado:** planejamento e documentação inicial; implementação ainda não iniciada.
 
-Aplicativo externo para Linux para gerenciar mods do RimWorld, com foco inicial em instalação GOG executada pelo Bottles/Wine. Não deve depender da Steam.
+Aplicativo externo para Linux para gerenciar mods do RimWorld. O escopo inicial prevê compatibilidade com instalações GOG executadas por Bottles/Wine, sem depender da Steam.
 
-## Ambiente inicial de referência
+## Ambiente e compatibilidade
 
-- Sistema: AnduinOS.
-- Jogo: RimWorld GOG 1.6.4633 rev1245.
-- Execução: Bottles Flatpak.
-- Hardware de referência: 7,5 GiB de RAM e Intel HD Graphics 4000.
+- Plataforma-alvo inicial: Linux.
+- Método de instalação a considerar: GOG.
+- Camada de execução a considerar: Bottles/Wine.
 
-Esses dados servem para orientar testes e compatibilidade, não devem ser tratados como caminhos fixos ou requisitos universais.
+O aplicativo deve detectar caminhos dinamicamente e também permitir seleção manual. Não registrar neste documento especificações do computador, sistema operacional específico, localização, nome real, contas pessoais ou outros dados privados do usuário. Testes de compatibilidade devem usar ambientes genéricos e dados fictícios sempre que possível.
 
 ## Objetivo e escopo
 
@@ -68,7 +67,7 @@ As versões e escolhas ainda precisam ser confirmadas antes da implementação.
 
 Nenhuma funcionalidade do aplicativo foi implementada até o momento.
 
-## Regras obrigatórias de segurança
+## Regras obrigatórias de segurança e privacidade
 
 - Preservar saves e arquivos dos mods.
 - Nunca excluir mods automaticamente.
@@ -78,7 +77,8 @@ Nenhuma funcionalidade do aplicativo foi implementada até o momento.
 - Validar XML e caminhos; se houver erro, preservar o original.
 - Não sobrescrever backups silenciosamente.
 - Não presumir que todos os usuários têm a mesma instalação ou diretórios.
-- Não incluir saves, arquivos privados, tokens ou dados pessoais no GitHub.
+- Não incluir saves, arquivos privados, tokens, credenciais, dados pessoais ou detalhes identificáveis do ambiente do usuário no GitHub.
+- Usar dados fictícios ou anonimizados em exemplos, testes, issues e documentação.
 
 ## Organização do trabalho entre as IAs
 
@@ -95,6 +95,7 @@ Cada IA deve:
 4. Não presumir que uma sugestão ou código gerado já foi testado.
 5. Informar arquivos alterados, decisões, testes executados e pendências.
 6. Atualizar este arquivo ao concluir sua parte, ou fornecer o texto da atualização para ser integrado.
+7. Não acrescentar informações pessoais do usuário ao repositório.
 
 ## Próxima etapa recomendada
 
@@ -117,9 +118,16 @@ Ao atualizar este arquivo, manter as seções de contexto e acrescentar uma entr
 - testes executados e resultado;
 - próximo passo.
 
+Não registrar dados pessoais ou detalhes particulares do computador usado pelo usuário.
+
 ## Histórico de atualizações
 
 ### 2026-11-16 — ChatGPT
 - Criado o arquivo de comunicação compartilhada entre as IAs.
-- Registrado o escopo, ambiente de referência, documentação existente, regras de segurança e próxima etapa.
+- Registrado o escopo, tecnologias propostas, documentação existente, regras de segurança e próxima etapa.
 - Implementação do aplicativo ainda não iniciada.
+
+### 2026-11-16 — ChatGPT
+- Revisado o arquivo para remover especificações pessoais do computador e do sistema do usuário.
+- Mantidas apenas informações gerais de compatibilidade que fazem parte do escopo do produto.
+- Acrescentadas regras explícitas para não publicar dados pessoais no repositório.
