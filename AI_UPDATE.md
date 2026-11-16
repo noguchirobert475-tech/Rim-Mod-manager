@@ -7,7 +7,7 @@
 **Nome:** RimMod Manager  
 **Repositório:** https://github.com/noguchirobert475-tech/Rim-Mod-manager  
 **Branch principal:** `main`  
-**Estado:** planejamento e documentação inicial; implementação ainda não iniciada.
+**Estado:** documentação inicial publicada; primeira implementação foi reportada por Claude, mas ainda não foi localizada na branch `main` nem validada neste repositório.
 
 Aplicativo externo para Linux para gerenciar mods do RimWorld. O escopo inicial prevê compatibilidade com instalações GOG executadas por Bottles/Wine, sem depender da Steam.
 
@@ -45,18 +45,19 @@ O aplicativo deve detectar caminhos dinamicamente e também permitir seleção m
 - Baixar ou atualizar mods automaticamente.
 - Exigir Steam ou conexão com a internet para funções locais básicas.
 
-## Tecnologias propostas
+## Tecnologias e ferramentas propostas
 
-- Python 3
-- PySide6 para interface gráfica
-- SQLite para cache e dados locais
-- XML para `ModsConfig.xml`
-- JSON para perfis
-- pytest para testes (proposta)
+- Python >= 3.10.
+- PySide6 >= 6.6 e < 7.
+- pytest >= 8.
+- SQLite para cache e dados locais.
+- XML para `ModsConfig.xml`.
+- JSON para perfis.
+- Logs em diretório compatível com XDG.
 
-As versões e escolhas ainda precisam ser confirmadas antes da implementação.
+As dependências declaradas nos arquivos do projeto devem ser a fonte definitiva; as versões acima foram reportadas na implementação inicial e ainda precisam ser confirmadas na revisão.
 
-## Documentação já criada na branch `main`
+## Documentação inicial publicada na branch `main`
 
 - `README.md` — apresentação e visão geral.
 - `PROJECT.md` — objetivos, escopo e critérios do MVP.
@@ -65,7 +66,54 @@ As versões e escolhas ainda precisam ser confirmadas antes da implementação.
 - `CONTRIBUTING.md` — fluxo Git, revisão e colaboração entre IAs.
 - `CHANGELOG.md` — histórico inicial.
 
-Nenhuma funcionalidade do aplicativo foi implementada até o momento.
+## Primeira implementação reportada por Claude
+
+Claude informou ter criado os seguintes arquivos:
+
+- `main.py`
+- `core/__init__.py`
+- `core/logging_setup.py`
+- `ui/__init__.py`
+- `ui/main_window.py`
+- `tests/test_logging_setup.py`
+- `tests/test_main_window.py`
+- `pyproject.toml`
+- `requirements.txt`
+- `requirements-dev.txt`
+- `.gitignore`
+- `.gitkeep` em `profiles/`, `backups/` e `database/`
+
+**Atenção: status não verificado.** Na consulta à branch `main` feita em 2026-11-16, `main.py`, `requirements-dev.txt` e `pyproject.toml` não foram encontrados. Portanto, a implementação acima deve ser tratada como trabalho reportado por Claude, não como código já integrado ao repositório. Não presumir que os arquivos estão publicados ou revisados. Confirmar a branch/PR ou receber os arquivos antes de continuar sobre essa base.
+
+### Decisões reportadas
+
+- Python >= 3.10.
+- PySide6 >= 6.6 e < 7.
+- pytest >= 8.
+- Configuração de logs usando diretórios XDG.
+
+### Testes reportados
+
+- Lógica de logging verificada manualmente: quatro checagens informadas como OK.
+- `pytest` não executado.
+- Aplicativo PySide6 não executado.
+- Motivo informado: ambiente sem os pacotes e sem acesso à rede.
+
+Esses resultados são relatos, ainda não foram reproduzidos de forma independente.
+
+### Comandos para validação local
+
+Executar na raiz do projeto, depois que os arquivos da implementação estiverem disponíveis:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+pytest
+python main.py
+```
+
+Se a instalação das dependências falhar, registrar o erro completo; não marcar os testes como aprovados. A execução da interface pode exigir um ambiente gráfico disponível.
 
 ## Regras obrigatórias de segurança e privacidade
 
@@ -96,17 +144,18 @@ Cada IA deve:
 5. Informar arquivos alterados, decisões, testes executados e pendências.
 6. Atualizar este arquivo ao concluir sua parte, ou fornecer o texto da atualização para ser integrado.
 7. Não acrescentar informações pessoais do usuário ao repositório.
+8. Distinguir claramente código criado localmente, código enviado a uma branch e código integrado à `main`.
 
 ## Próxima etapa recomendada
 
-**Etapa 1 — Base do aplicativo:**
-1. Definir a versão mínima de Python e dependências.
-2. Criar a estrutura de diretórios do projeto.
-3. Criar um ponto de entrada mínimo.
-4. Inicializar uma janela PySide6 simples.
-5. Configurar testes e logs básicos.
+1. Disponibilizar a implementação reportada por Claude em uma branch ou Pull Request.
+2. Conferir os arquivos e revisar a segurança do logging e da inicialização da interface.
+3. Criar ambiente virtual e instalar as dependências de desenvolvimento.
+4. Executar `pytest` e `python main.py`, registrando resultados reais.
+5. Corrigir falhas antes de iniciar `core/game_detector.py`.
+6. Implementar a detecção do RimWorld somente com operações de leitura e caminhos selecionáveis.
 
-Não começar ainda a editar arquivos reais do RimWorld. A primeira implementação deve operar em ambiente de teste e priorizar leitura.
+Não editar arquivos reais do RimWorld nesta etapa.
 
 ## Como registrar atualizações
 
@@ -131,3 +180,10 @@ Não registrar dados pessoais ou detalhes particulares do computador usado pelo 
 - Revisado o arquivo para remover especificações pessoais do computador e do sistema do usuário.
 - Mantidas apenas informações gerais de compatibilidade que fazem parte do escopo do produto.
 - Acrescentadas regras explícitas para não publicar dados pessoais no repositório.
+
+### 2026-11-16 — Claude (relato recebido; integração pendente)
+- Reportada a criação da estrutura inicial do aplicativo, janela PySide6 e testes básicos.
+- Reportadas quatro checagens manuais de logging como OK.
+- `pytest` e execução do aplicativo ainda não foram realizados.
+- Os arquivos reportados não foram encontrados na branch `main na verificação do ChatGPT; confirmar branch/PR e revisar antes de considerar a implementação integrada.
+- Próximo passo reportado: validar a base e depois implementar detecção do RimWorld em modo somente leitura.
